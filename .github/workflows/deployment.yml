@@ -1,0 +1,56 @@
+name: 'Build and deploy'
+
+on:
+    push:
+        branches:
+            - main
+    workflow_dispatch:
+
+jobs:
+
+    build-and-deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            
+            - name: Setup Golang
+              uses: actions/setup-go@v4
+              with:
+                go-version: '1.22.x'
+              
+            - name: Install dependencies
+              working-directory: ./src
+              run: "go mod download"
+
+            - name: Compile go package
+              run: "go build -C src/ -tags lambda.norpc -o bootstrap main.go"
+              env:
+                GOOS: linux
+                CGO_ENABLED: 0
+              
+            - name: Create ZIP package
+              working-directory: ./src
+              run: zip main.zip bootstrap
+
+            - name: Setup Node for CDK
+              uses: actions/setup-node@v4
+              with:
+                node-version: '20.12.2'
+
+            - name: Install dependencies
+              working-directory: ./cdk
+              run: | # aws-cdk needs to be globally installed so that `cdk` is added to $PATH
+                npm install -g aws-cdk
+                npm install
+
+            - name: Configure AWS credentials
+              uses: aws-actions/configure-aws-credentials@v4
+              with:
+                aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                aws-region: ${{ secrets.AWS_REGION }}
+
+            - name: Deploy CDK Stack
+              working-directory: ./cdk
+              run:
+                cdk deploy --require-approval never

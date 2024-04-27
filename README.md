@@ -9,6 +9,8 @@ Golang `Hello, World!` app deployed with AWS Lambda function behind AWS API Gate
 * [Local setup](#local-setup)
 * [Manual deployment](#manual-deployment)
 * [Cleanup](#cleanup)
+* [Possible improvements](#possible-improvements-not-covered-in-this-repo)
+* [License](#license)
 
 ## Pre-requisites
 
@@ -54,3 +56,15 @@ $ make cdk-cleanup
 ```
 
 ![alt text](./docs/cleanup.png)
+
+
+## Possible improvements **not** covered in this repo
+* Pre-commit hooks for Go and Typescript code (linting, formatting, etc)
+* Automated testing for Go and Typescript code
+* Multi-environment setup
+* Running CD pipeline **only** when relevant [`cdk/`](./cdk/) or [`src/`](./src/) contents change
+
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.

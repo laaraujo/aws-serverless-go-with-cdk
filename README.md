@@ -1,3 +1,5 @@
+[![Deployment](https://github.com/laaraujo/aws-serverless-go-with-cdk/actions/workflows/deployment.yml/badge.svg?branch=main)](https://github.com/laaraujo/aws-serverless-go-with-cdk/actions/workflows/deployment.yml)
+
 # Hello World - Go Serverless endpoint in AWS
 
 Golang `Hello, World!` app deployed with AWS Lambda function behind AWS API Gateway endpoint via Github Actions.

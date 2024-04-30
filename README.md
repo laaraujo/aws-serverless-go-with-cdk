@@ -61,6 +61,7 @@ $ make cdk-cleanup
 ## Possible improvements **not** covered in this repo
 * Pre-commit hooks for Go and Typescript code (linting, formatting, etc)
 * Automated testing for Go and Typescript code
+* Monitoring / Healthchecks
 * Multi-environment setup
 * Running CD pipeline **only** when relevant [`cdk/`](./cdk/) or [`src/`](./src/) contents change
 

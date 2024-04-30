@@ -9,7 +9,7 @@ help:
 	@echo 'build       : Build Go package'
 	@echo 'zip         : Compress Go package for deployment'
 	@echo 'cdk-deploy  : Deploy latest version through CDK'
-	@echo 'cleanup     : Clean up cloud environment'
+	@echo 'cdk-cleanup : Clean up cloud environment'
 
 setup:
 	cd $(cdk_dir); npm install
